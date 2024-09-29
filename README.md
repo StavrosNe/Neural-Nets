@@ -5,6 +5,7 @@ This repository contains custom implementations of neural network architectures 
 1. Multilayer Perceptron (MLP)
 2. Recurrent Neural Network (RNN)
 3. Physics Informed Neural Network (PINN)
+4. Kolmogorov Arnold Network (KAN)
 
 ## Overview
 
