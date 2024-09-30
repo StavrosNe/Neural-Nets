@@ -11,3 +11,7 @@ Original kan paper :*f(x) = ws spline(x) + wb silu(x)*.
 
 link to the original paper:https://arxiv.org/abs/2404.19756  
 link to the paper's implementation:https://github.com/KindXiaoming/pykan
+
+## Toy Example
+
+!( "Toy Exmple")

@@ -24,11 +24,10 @@ class BSpline:
         # im applying the Cox deBoor reqursion formula for bspline basis functions
         # p is the degree of the basis function
         V = knot_vector
-        I = len(V) - 1
         x = np.asarray(x)  
         
         if p == 0:
-            if i != I:
+            if i !=(self.imax-1):
                 return np.where((V[i] <= x) & (x < V[i+1]), 1, 0)
             else:
                 return np.where((V[i] <= x) & (x <= V[i+1]), 1, 0)
