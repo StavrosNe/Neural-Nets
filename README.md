@@ -2,7 +2,7 @@
 
 This repository contains custom implementations of neural network architectures in Python. Currently, it includes implementations for:
 
-1. Multi-layer Perceptron (MLP)
+1. Multi-Layer Perceptron (MLP)
 2. Recurrent Neural Network (RNN)
 3. Physics Informed Neural Network (PINN)
 4. Kolmogorov Arnold Network (KAN)
