@@ -14,4 +14,4 @@ link to the paper's implementation:https://github.com/KindXiaoming/pykan
 
 ## Toy Example
 
-!( "Toy Exmple")
+!(https://github.com/StavrosNe/Neural-Nets/blob/main/Kolmogorov%20Arnold%20Network/example2.png "Toy Exmple")
