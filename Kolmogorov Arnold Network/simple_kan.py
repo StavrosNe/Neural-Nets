@@ -15,16 +15,6 @@ class Simple_Kan_hidden_layer_1():
         self.m = shape[0]
         self.n = shape[1]
 
-    def sigmoid(self,x):
-        return 1 / (1 + np.exp(-x))
-
-    def silu(self,x):
-        return x * self.sigmoid(x)
-
-    def silu_derivative(self,x):
-        sig_x = self.sigmoid(x)
-        return sig_x + x * sig_x * (1 - sig_x)
-
     def init(self):
         self.spline_init()
         self.init_control_points()
@@ -98,16 +88,6 @@ class Simple_Kan_hidden_layer_2():
         shape = self.X0.shape
         self.m = shape[0]
         self.n = shape[1]
-        
-    def sigmoid(self,x):
-        return 1 / (1 + np.exp(-x))
-
-    def silu(self,x):
-        return x * self.sigmoid(x)
-
-    def silu_derivative(self,x):
-        sig_x = self.sigmoid(x)
-        return sig_x + x * sig_x * (1 - sig_x)
     
     def init(self):
         self.spline_init()
