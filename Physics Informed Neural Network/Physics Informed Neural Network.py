@@ -1,5 +1,7 @@
 import numpy as np
 
+import matplotlib.pyplot as plt
+
 def tanh(x):
     return np.tanh(x)
 
@@ -66,11 +68,10 @@ def back_propagation(A0,Y,forward:dict,parameters:dict,dydx):
 
     
     initial_condition_error = Y0 - Y[0]
-    ode_error = Y_hat - dydx
-
+    ode_error = dydx - Y_hat 
 
     l1 = 1
-    l2 = 0.01
+    l2 = 0.1
     
     m = A0.shape[1]
 
@@ -101,25 +102,29 @@ def gradient(forward:dict,parameters:dict):
     W2 = parameters['W2']
     W3 = parameters['W3']
 
-    Y_hat = forward['Y_hat']
     Z1 = forward['Z1'] 
     Z2 = forward['Z2']
    
-    # graidents in relation to network outout Y
-    dydy = np.ones_like(Y_hat )
-    dydz3 = dydy
+    # gradients in relation to network output Y
 
-    dyda2 = np.dot(W3.T, dydz3)
-    dydz2 = dyda2 * tanh_derivative(Z2)
-   
+    dyda2 = W3
+    da2dz2 = tanh_derivative(Z2)
+    dz2da1 = W2
+    da1dz1 = tanh_derivative(Z1)
+    dz1dx = W1
 
-    dyda1 = np.dot(W2.T, dydz2)
-    dydz1 = dyda1 * tanh_derivative(Z1)
-
-    dydx = np.dot(W1.T, dydz1)
+    dydx = dydx = np.dot(W3, da2dz2 * np.dot(W2, da1dz1 * W1))
 
     return dydx
 
+
+
+def update(parameters,gradients,learning_rate):
+
+    for key in parameters.keys():
+        parameters[key] -= learning_rate * gradients[key]
+
+    return parameters
 
 def update_adam(parameters, grads, v, s, t, learning_rate=None, beta1=0.9, beta2=0.999, epsilon=1e-8):
     v_corrected = {}
@@ -153,6 +158,7 @@ def train(A0, Y, epochs, a, n1, n2, n3, n4):
         dydx = gradient(forward,parameters)
         gradients = back_propagation(A0,Y,forward,parameters, dydx)
         parameters,v,s = update_adam(parameters, gradients, v, s, i, learning_rate=a)
+        #parameters = update(parameters,gradients,a)
 
         Y_hat = forward['Y_hat'].flatten()
 
@@ -174,7 +180,7 @@ Y = np.exp(X) #ode solution
 m = len(X)
 A0 = X.reshape((n1, m))
 
-epochs = 100000
+epochs = 2000
 a = 0.001
 
 
@@ -183,3 +189,10 @@ Y_hat = train(A0, Y, epochs, a, n1, n2, n3, n4)
 
 
 
+plt.figure(figsize=(12, 8))
+plt.plot(X,Y, color='black', linewidth=2)
+plt.plot(X,Y_hat, linestyle='--', color='gray', linewidth=2)
+plt.title('PINN')
+plt.xlabel('Time')
+plt.ylabel('Signal Value')
+plt.show()
