@@ -7,7 +7,7 @@ class BSpline:
         
         """
         Let G be the number of intervals in the original vector.
-        The knot vector is augmented as the first and last knots 
+        The knot vector is augmented at the first and last knots 
         are repeated k+1 times for a clamped spline.
         For example original knot vector: [0,1,2,3]
         -> knot_vector = [0,0,0,0,1,2,3,3,3,3]
